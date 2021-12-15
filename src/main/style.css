@@ -1,0 +1,64 @@
+* {
+    -background: #403e3e;
+    -highlight: #62ab89;
+    -text: white;
+}
+
+.root {
+    -fx-background-color: -background;
+    -fx-font-family: "Helvetica Neue Light";
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+HBox, VBox {
+    -fx-spacing: 10;
+}
+
+.slider, .label, .text-area {
+    -fx-min-width: 330;
+    -fx-text-fill: -text;
+}
+
+.text-area {
+    -fx-max-height: 30;
+    -fx-text-fill: -text;
+    -fx-prompt-text-fill: grey;
+}
+
+.text-area .content {
+    -fx-background-color: -background;
+    -fx-text-fill: -text;
+}
+
+.button {
+    -fx-min-width: 160;
+    -fx-pref-height: 30;
+    -fx-background-color: -highlight;
+    -fx-border-color: -text;
+    -fx-text-fill: -text;
+    -fx-font-size: 12px;
+}
+
+.slider {
+    -fx-show-tick-marks: true;
+    -fx-show-tick-labels: true;
+    -fx-block-increment: 0.1;
+    -fx-major-tick-unit: 10;
+    -fx-minor-tick-count: 5;
+}
+
+.slider .axis {
+    -fx-tick-label-fill: -text;
+}
+
+.slider .track {
+    -fx-background-color: -background;
+    -fx-border-color: -text;
+}
+
+.slider .thumb {
+    -fx-background-color: -text 10%, -highlight;
+}
+
+
