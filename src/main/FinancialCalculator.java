@@ -41,7 +41,7 @@ public class FinancialCalculator extends Application {
 
         HBox rateInput = new HBox();
         Slider rateSlider = new Slider(0, 100, 5);
-        Label rateLabel = new Label("Rate: " + String.valueOf(rateSlider.getValue()) + "%");
+        Label rateLabel = new Label("Rate: " + rateSlider.getValue() + "%");
         rateInput.getChildren().addAll(rateSlider, rateLabel);
 
         HBox buttons = new HBox();
@@ -55,36 +55,27 @@ public class FinancialCalculator extends Application {
         Label amountUnits = new Label("$");
         output.getChildren().addAll(amountTextArea,amountUnits);
 
-        rateSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                DecimalFormat df = new DecimalFormat("#.#");
-                rateLabel.setText("Rate: " + df.format(newValue) + "%");
-            }
+        rateSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            DecimalFormat df = new DecimalFormat("#.#");
+            rateLabel.setText("Rate: " + df.format(newValue) + "%");
         });
 
-        simpleInterestButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                double principal = Float.parseFloat(principalTextArea.getText());
-                double time = Float.parseFloat(timeTextArea.getText());
-                double interestRate = rateSlider.getValue()/100;
-                double amount = principal * (1 + interestRate * time);
-                DecimalFormat df = new DecimalFormat("#.##");
-                amountTextArea.setText(df.format(amount));
-            }
+        simpleInterestButton.setOnAction(event -> {
+            double principal = Float.parseFloat(principalTextArea.getText());
+            double time = Float.parseFloat(timeTextArea.getText());
+            double interestRate = rateSlider.getValue()/100;
+            double amount = principal * (1 + interestRate * time);
+            DecimalFormat df = new DecimalFormat("#.##");
+            amountTextArea.setText(df.format(amount));
         });
 
-        compundInterestButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                double principal = Float.parseFloat(principalTextArea.getText());
-                double time = Float.parseFloat(timeTextArea.getText());
-                double interestRate = rateSlider.getValue()/100;
-                double amount = principal * Math.pow(1 + interestRate, time);
-                DecimalFormat df = new DecimalFormat("#.##");
-                amountTextArea.setText(df.format(amount));
-            }
+        compundInterestButton.setOnAction(event -> {
+            double principal = Float.parseFloat(principalTextArea.getText());
+            double time = Float.parseFloat(timeTextArea.getText());
+            double interestRate = rateSlider.getValue()/100;
+            double amount = principal * Math.pow(1 + interestRate, time);
+            DecimalFormat df = new DecimalFormat("#.##");
+            amountTextArea.setText(df.format(amount));
         });
 
         root.getChildren().addAll(principalLabel, principalInput, timeLabel, timeInput, rateLabel, rateInput, buttons, output);
